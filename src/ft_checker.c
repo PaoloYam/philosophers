@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   ft_checker.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyammoun <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/23 13:54:01 by pyammoun          #+#    #+#             */
-/*   Updated: 2022/09/23 13:54:30 by pyammoun         ###   ########.fr       */
+/*   Created: 2022/09/26 14:48:28 by pyammoun          #+#    #+#             */
+/*   Updated: 2022/09/26 14:48:41 by pyammoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*routine(void *philo)
+/*int ft_timechecker(t_info *info)
 {
-	t_philo	*philou;
+	long long	timestart;
 
-	philou = (t_philo*)philo;
-	if (philou->id%2 != 0)
-		usleep(100);
-	printf("%lld\n", philou->last_meal = ft_gettime());
+	timestart = ft_gettime();
+	while ((ft_gettime() - timestart) <
+}*/
+
+int ft_eatchecker(t_info *info)
+{
+	int i;
+
+	i = 0;
+	while (i < info->nbphilo)
+	{
+		if (info->philo[i].eat_nb = info->musteat)
+		{
+			info->all_eat = 1;
+			return (1);
+		}
+		i++;
+	}
 	return (0);
 }
+
