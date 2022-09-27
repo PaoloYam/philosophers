@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS =	${addprefix src/, philo.c utils.c creation.c execution.c}
+SRCS =	${addprefix src/, main.c utils.c creation.c execution.c checker.c}
 OBJS        =	${SRCS:.c=.o}
 NAME        =	philo
 AR    		=	ar rcs

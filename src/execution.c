@@ -12,13 +12,29 @@
 
 #include "philo.h"
 
+
+int ft_eating(t_philo *philo)
+{
+	int i;
+
+	i = 0;
+	pthread_mutex_lock(philo->r_fork);
+}
+
+
 void	*routine(void *philo)
 {
 	t_philo	*philou;
 
 	philou = (t_philo*)philo;
+	philou->last_meal = ft_gettime();
 	if (philou->id%2 != 0)
-		usleep(100);
+		usleep(500);
+	ft_eating(philou);/*while (philou->info->all_eat != 1 && philou->info->dead != 1)
+	{
+
+
+	}*/
 	printf("%lld\n", philou->last_meal = ft_gettime());
 	return (0);
 }

@@ -14,13 +14,13 @@
 
 int	ft_creationphilo(t_info *info)
 {
-	pthread_t th[info->nbphilo];
 	int	i;
 
 	i = 0;
+	info->start_time = ft_gettime();
 	while (i < info->nbphilo)
 	{
-		if (pthread_create(th + i, NULL, &routine, &info->philo[i]) != 0)
+		if (pthread_create(&info->philo[i].th, NULL, &routine, &info->philo[i]) != 0)
 		{
 			printf("Error\n");
 			return (0);
@@ -30,7 +30,7 @@ int	ft_creationphilo(t_info *info)
 	i = 0;
 	while (i < info->nbphilo)
 	{
-		if (pthread_join(th[i], NULL) != 0)
+		if (pthread_join(info->philo[i].th, NULL) != 0)
 			return (0);
 		i++;
 	}
@@ -44,7 +44,8 @@ int ft_mallocstruct(t_info *info) {
 	info->philo = malloc(sizeof(*info->philo) * info->nbphilo);
 	if (!info->philo)
 		return (0);
-	while (i < info->nbphilo) {
+	while (i < info->nbphilo)
+	{
 		info->philo[i].id = i;
 		info->philo[i].eat_nb = 0;
 		info->philo[i].r_fork = &info->fork[i];
@@ -72,6 +73,8 @@ int ft_creationmutex(t_info *info)
 			return (0);
 		i++;
 	}
+	if (pthread_mutex_init(&info->writing, NULL) != 0)
+		return (0);
 	return (1);
 }
 

@@ -42,6 +42,7 @@ struct s_info {
 	int 		musteat;
 	int 		dead;
 	int 		all_eat;
+	long long	start_time;
 	t_philo		*philo;
 	t_mutex		*fork;
 	t_mutex		writing;

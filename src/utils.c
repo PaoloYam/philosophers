@@ -42,3 +42,5 @@ long long	ft_gettime(void)
 	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000 + (time.tv_usec / 1000));
 }
+
+int print_action(t_philo *philo, char *str)

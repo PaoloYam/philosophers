@@ -27,7 +27,7 @@ int ft_eatchecker(t_info *info)
 	i = 0;
 	while (i < info->nbphilo)
 	{
-		if (info->philo[i].eat_nb = info->musteat)
+		if (info->philo[i].eat_nb == info->musteat)
 		{
 			info->all_eat = 1;
 			return (1);
@@ -37,3 +37,13 @@ int ft_eatchecker(t_info *info)
 	return (0);
 }
 
+/*int ft_deathchecker(t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < info->nbphilo)
+	{
+		if (in)
+	}
+}*/
