@@ -22,7 +22,7 @@ int	ft_atoi(const char *str)
 	m = 1;
 	r = 0;
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\f'
-		   || str[i] == '\r' || str[i] == '\n' || str[i] == '\v')
+		|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v')
 		i++;
 	if (str[i] == '+' || str[i] == '-')
 		if (str[i++] == '-')
@@ -43,4 +43,28 @@ long long	ft_gettime(void)
 	return (time.tv_sec * 1000 + (time.tv_usec / 1000));
 }
 
-int print_action(t_philo *philo, char *str)
+void	ft_print_action(t_philo *philo, int c)
+{
+	pthread_mutex_lock(&philo->info->writing);
+	if (c == 1)
+		printf("%s%lld %d %s\n", "\033[0;33m",
+			ft_gettime() - philo->info->start_time,
+			philo->id + 1, "has taken a fork");
+	if (c == 2)
+		printf("%s%lld %d %s\n", "\033[0;32m",
+			ft_gettime() - philo->info->start_time,
+			philo->id + 1, "is eating");
+	if (c == 3)
+		printf("%s%lld %d %s\n", "\033[0;35m",
+			ft_gettime() - philo->info->start_time,
+			philo->id + 1, "is sleeping");
+	if (c == 4)
+		printf("%s%lld %d %s\n", "\033[0;34m",
+			ft_gettime() - philo->info->start_time,
+			philo->id + 1, "is thinking");
+	if (c == 5)
+		printf("%s%lld %d %s\n", "\033[0;31m",
+			ft_gettime() - philo->info->start_time,
+			philo->id + 1, "is dead");
+	pthread_mutex_unlock(&philo->info->writing);
+}

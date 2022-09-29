@@ -25,10 +25,10 @@ typedef pthread_t		t_pthread;
 typedef struct s_philo	t_philo;
 struct s_philo {
 	int				id;
-	int 			eat_nb;
-	long long 		last_meal;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
+	int				eat_nb;
+	long long		last_meal;
+	int				r_fork;
+	int				l_fork;
 	t_pthread		th;
 	struct s_info	*info;
 };
@@ -37,11 +37,11 @@ typedef struct s_info	t_info;
 struct s_info {
 	int			nbphilo;
 	long long	ttd;
-	long long 	tte;
-	long long 	tts;
-	int 		musteat;
-	int 		dead;
-	int 		all_eat;
+	long long	tte;
+	long long	tts;
+	int			musteat;
+	int			dead;
+	int			all_eat;
 	long long	start_time;
 	t_philo		*philo;
 	t_mutex		*fork;
@@ -49,12 +49,16 @@ struct s_info {
 };
 
 int			ft_atoi(const char *str);
-int 		ft_creationphilo(t_info *info);
+int			ft_creationphilo(t_info *info);
 int			ft_mallocstruct(t_info *info);
 void		*routine(void *philo);
-int 		ft_starter(t_info *info);
-int 		ft_creationmutex(t_info *info);
-int			ft_timelimit(t_info *info);
-long long 	ft_gettime(void);
+int			ft_starter(t_info *info);
+int			ft_creationmutex(t_info *info);
+long long	ft_gettime(void);
+void		ft_print_action(t_philo *philo, int c);
+int			ft_eatchecker(t_info *info);
+int			ft_deathchecker(t_info *info);
+void		ft_eat_time(t_philo *philo);
+void		ft_death_time(t_philo *philo);
 
 #endif

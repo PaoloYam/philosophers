@@ -20,13 +20,15 @@ int	ft_creationphilo(t_info *info)
 	info->start_time = ft_gettime();
 	while (i < info->nbphilo)
 	{
-		if (pthread_create(&info->philo[i].th, NULL, &routine, &info->philo[i]) != 0)
+		if (pthread_create(&info->philo[i].th, NULL,
+				&routine, &info->philo[i]) != 0)
 		{
 			printf("Error\n");
 			return (0);
 		}
 		i++;
 	}
+	ft_deathchecker(info);
 	i = 0;
 	while (i < info->nbphilo)
 	{
@@ -37,8 +39,9 @@ int	ft_creationphilo(t_info *info)
 	return (1);
 }
 
-int ft_mallocstruct(t_info *info) {
-	int i;
+int	ft_mallocstruct(t_info *info)
+{
+	int	i;
 
 	i = 0;
 	info->philo = malloc(sizeof(*info->philo) * info->nbphilo);
@@ -48,20 +51,21 @@ int ft_mallocstruct(t_info *info) {
 	{
 		info->philo[i].id = i;
 		info->philo[i].eat_nb = 0;
-		info->philo[i].r_fork = &info->fork[i];
-		info->philo[i].l_fork = &info->fork[i - 1];
-		if (i == 0)
-			info->philo[i].l_fork = &info->fork[info->nbphilo - 1];
-		info->philo[i].last_meal = 0;
+		info->philo[i].r_fork = i;
+		if (info->nbphilo == 1)
+			info->philo[i].l_fork = -1000;
+		else if (i == 0)
+			info->philo[i].l_fork = info->nbphilo - 1;
+		else
+			info->philo[i].l_fork = i - 1;
+		info->philo[i].last_meal = ft_gettime();
 		info->philo[i].info = info;
-		//info->philo[i].th = i;
 		i++;
 	}
 	return (1);
 }
 
-
-int ft_creationmutex(t_info *info)
+int	ft_creationmutex(t_info *info)
 {
 	int	i;
 
@@ -77,5 +81,3 @@ int ft_creationmutex(t_info *info)
 		return (0);
 	return (1);
 }
-
-
