@@ -22,10 +22,7 @@ int	ft_creationphilo(t_info *info)
 	{
 		if (pthread_create(&info->philo[i].th, NULL,
 				&routine, &info->philo[i]) != 0)
-		{
-			printf("Error\n");
 			return (0);
-		}
 		i++;
 	}
 	ft_deathchecker(info);
@@ -71,6 +68,8 @@ int	ft_creationmutex(t_info *info)
 
 	i = 0;
 	info->fork = malloc(sizeof(*info->fork) * info->nbphilo);
+	if (!info->fork)
+		return (0);
 	while (i < info->nbphilo)
 	{
 		if (pthread_mutex_init(&info->fork[i], NULL) != 0)

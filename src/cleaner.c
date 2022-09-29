@@ -1,53 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checker.c                                       :+:      :+:    :+:   */
+/*   cleaner.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyammoun <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 14:48:28 by pyammoun          #+#    #+#             */
-/*   Updated: 2022/09/29 16:43:48 by pyammoun         ###   ########.fr       */
+/*   Created: 2022/09/29 18:26:18 by pyammoun          #+#    #+#             */
+/*   Updated: 2022/09/29 18:26:21 by pyammoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_eatchecker(t_info *info)
+void	ft_cleanmutex(t_info *info)
 {
 	int	i;
 
 	i = 0;
-	if (info->musteat == 0)
-		return (0);
 	while (i < info->nbphilo)
 	{
-		if (info->philo[i].eat_nb < info->musteat)
-			return (0);
+		pthread_mutex_destroy(&info->fork[i]);
 		i++;
 	}
-	info->all_eat = 1;
-	return (1);
+	pthread_mutex_destroy(&info->writing);
 }
 
-int	ft_deathchecker(t_info *info)
+void	ft_free(t_info *info)
 {
-	int		i;
-	t_philo	*p;
+	free(info->fork);
+	free(info->philo);
+}
 
-	i = 0;
-	while (!info->all_eat && !info->dead)
-	{
-		i = -1;
-		while (++i < info->nbphilo)
-		{
-			p = &info->philo[i];
-			if (ft_gettime() - p->last_meal > info->ttd)
-			{
-				info->dead = 1;
-				ft_print_action(p, 5);
-				return (1);
-			}
-		}
-	}
-	return (0);
+void	ft_cleaning(t_info *info)
+{
+	ft_cleanmutex(info);
+	ft_free(info);
 }

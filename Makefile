@@ -10,13 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS =	${addprefix src/, main.c utils.c creation.c execution.c checker.c}
+SRCS =	${addprefix src/, main.c utils.c creation.c execution.c checker.c cleaner.c}
 OBJS        =	${SRCS:.c=.o}
 NAME        =	philo
 AR    		=	ar rcs
 GCC       	=	gcc 
 RM       	=	rm -f
-CFLAGS    	=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS    	=	-Wall -Wextra -Werror -g
 
 all:	$(NAME)
 

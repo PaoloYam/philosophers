@@ -60,5 +60,8 @@ int			ft_eatchecker(t_info *info);
 int			ft_deathchecker(t_info *info);
 void		ft_eat_time(t_philo *philo);
 void		ft_death_time(t_philo *philo);
+void		ft_cleaning(t_info *info);
+void		ft_free(t_info *info);
+void		ft_cleanmutex(t_info *info);
 
 #endif
