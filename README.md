@@ -4,4 +4,7 @@ A programm in C that represents the problem of the philosophers. The dilem is th
 have to eat a plate but they share the fork inbetween them and need both of them to eat. They have a specific time to eat before dying and therefore should share
 their forks effectivly in order to all eat. 
 
+![philo](https://zerobone.net/assets/img/blog/dining-philosophers-tmb.jpg)
+
+
 The goal of this project is to design protocls that can handle accesss to shared ressources between process without causing deadlocks. 
